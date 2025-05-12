@@ -18,7 +18,7 @@ function Register() {
           dispatch(
             register({
               name: "ahmed2211122",
-              email: `ahmed2221122@example.com`,
+              email: `ahmewd2221122@example.com`,
               password: "P@ssw0rd",
               rePassword: "P@ssw0rd",
               phone: "01010700701",

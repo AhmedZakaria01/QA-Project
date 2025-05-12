@@ -12,17 +12,9 @@ export default function App() {
 
   return (
     <>
- 
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Layout />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={<Layout />} />
 
           <Route path="/login" element={<Login />} />
 
@@ -33,4 +25,7 @@ export default function App() {
       </BrowserRouter>
     </>
   );
+}
+{
+  /* <ProtectedRoute></ProtectedRoute> */
 }

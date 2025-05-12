@@ -1,7 +1,11 @@
-import React from "react";
+import Navbar from "./components/Navbar";
 
 function Layout() {
-  return <div>Layout</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
 
 export default Layout;

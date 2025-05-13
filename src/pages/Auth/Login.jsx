@@ -16,15 +16,11 @@ function Login() {
 
   const onSubmit = (data) => {
     console.log(data);
-    dispatch(
-      login({
-        email: "marwsafouad22@gmail.com",
-        password: "Marwa@123",
-      })
-    );
+    dispatch(login(data));
   };
 
-  console.log(watch("username")); // watch input value by passing the name of it
+  // console.log(watch("username")); // watch input value by passing the name of it
+
   return (
     <form
       className="bg-blue-950 text-white w-full max-w-md mx-auto mt-10 p-8 rounded-xl shadow-lg flex flex-col gap-y-4"

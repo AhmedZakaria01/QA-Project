@@ -1,0 +1,16 @@
+- Used Libraries
+    * Axios
+    * i18next
+    * react-i18next
+    * React-Router-Dom
+    * react-redux
+    * redux-toolkit
+    * react-hook-form
+    * react-icons -> Not Used
+    * tailwindcss
+    * 
+
+
+
+
+    

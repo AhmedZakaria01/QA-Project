@@ -40,14 +40,14 @@ const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    // Reducer to handle user logout
+    // logout
     logout(state) {
       state.user = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      // Handle login request status updates
+      // login
       .addCase(login.pending, (state) => {
         state.status = "loading";
       })
@@ -59,7 +59,10 @@ const authSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-      // Handle registration
+
+      //? ------------------------------------------------
+
+      // registration
       .addCase(register.pending, (state) => {
         state.status = "loading";
       })

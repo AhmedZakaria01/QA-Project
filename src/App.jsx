@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/Auth/Login";
-import PageNotFound from "./pages/Auth/PageNotFound";
+import PageNotFound from "./features/auth/PageNotFound";
 import Layout from "./Layout";
-import Register from "./pages/Auth/Register";
+import Register from "./features/auth/Register";
+import Login from "./features/auth/components/Login";
 export default function App() {
   return (
     <>
@@ -23,5 +23,3 @@ export default function App() {
 {
   /* <ProtectedRoute></ProtectedRoute> */
 }
-
-

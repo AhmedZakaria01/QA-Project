@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "@reduxjs/toolkit": "^2.8.1",
     "axios": "^1.9.0",
     "eslint-plugin-react": "^7.37.5",
@@ -24,7 +25,8 @@
     "react-pro-sidebar": "^1.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.0",
-    "sass": "^1.88.0"
+    "sass": "^1.88.0",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",

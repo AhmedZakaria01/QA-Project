@@ -8,15 +8,14 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://ecommerce.routemisr.com/api/v1",
+  baseURL: "https://localhost:7209/api/",
   headers: {
     "Content-Type": "application/json",
   },
 });
+// Login Method
+export const loginUser = (credentials) =>
+  api.post("Authenticate/login", credentials);
 
-export const loginUser = (credentials) => api.post("/auth/signin", credentials);
-export const registerUser = (data) => api.post("/auth/signup", data);
-
-// Example: add more services later
-// export const fetchUserData = () => api.get("/User/profile");
-// export const fetchProducts = () => api.get("/Products");
+// Register Method
+export const registerUser = (data) => api.post("/Authenticate/signup", data);

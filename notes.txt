@@ -1,3 +1,34 @@
+
+
+# TASKS
+ - localstorage Manager - Done
+ - Localization - Structure Done
+ - Requests Manager - Done   =>  Api Services Done
+ - Pipelines Manager - to be handled when needed -> Done
+ - Login Screen - Done
+ - Modules Navigation - Pending..
+
+
+
+
+
+
+
+
+
+- Modules => Features
+    * Auth
+    * 
+    * 
+---------------------------------------------------------------------------------------------------------
+
+* Folder & File Structure
+* Page not found
+* Validation Login Structure
+* App Routing Structure
+
+
+
 - Used Libraries
     * Axios
     * i18next
@@ -9,9 +40,18 @@
     * react-icons -> Not Used
     * tailwindcss
     * zod
-    * 
+    * @headlessui/react
+    * @fortawesome/fontawesome-free
 
 
 
 
     
+
+
+
+
+
+
+
+

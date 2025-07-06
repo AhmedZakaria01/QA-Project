@@ -1,6 +1,11 @@
-// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+/**
+ * This file contains functions for logging in and registering users.
+ * It uses Redux Toolkit's createAsyncThunk to handle the async API calls.
+ *
+ * - login: sends user login data to the server
+ * - register: sends new user data to the server to create an account
+ */
 
-// src/features/auth/authThunks.js
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "../../services/apiServices";
 

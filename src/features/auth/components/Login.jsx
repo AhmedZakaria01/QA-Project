@@ -4,11 +4,18 @@ import SubmitButton from "../../../components/SubmitButton";
 import { login } from "../authThunks";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Popup from "../../../globalComponents/Popup";
+import { useState } from "react";
 
 function Login() {
   const dispatch = useDispatch();
   const { user, status, error } = useSelector((state) => state.authReducer);
+  const [isOpen, setIsOpen] = useState(false);
   console.log(user);
+
+  function open() {
+    setIsOpen(true);
+  }
 
   //    ?  Login Schema
   const loginSchema = z.object({
@@ -37,6 +44,7 @@ function Login() {
   //   ?  On Submit
   const onSubmit = (data) => {
     dispatch(login(data));
+    open();
   };
 
   return (
@@ -89,6 +97,9 @@ function Login() {
         <div className="w-full my-3 pb-3">
           <SubmitButton bgColor="indigo-500" textColor="white" />
         </div>
+
+        {/* <Popup isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+        
       </form>
     </section>
   );

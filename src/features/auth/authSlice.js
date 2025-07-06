@@ -1,4 +1,7 @@
-// src/features/auth/authSlice.js
+/**
+ * This file defines the authentication slice using Redux Toolkit.
+ * It manages the authentication state (user, status, and error), and handles login, register, and logout actions.
+ */
 import { createSlice } from "@reduxjs/toolkit";
 import { login, register } from "./authThunks";
 

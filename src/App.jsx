@@ -3,6 +3,7 @@ import PageNotFound from "./features/auth/PageNotFound";
 import Layout from "./Layout";
 import Register from "./features/auth/Register";
 import Login from "./features/auth/components/Login";
+import NavigationMenu from "./globalComponents/NavigationMenu";
 export default function App() {
   return (
     <>
@@ -13,7 +14,9 @@ export default function App() {
           {/* AUTH */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/NavigationMenu" element={<NavigationMenu />} />
 
+          {/* Page Not Found */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

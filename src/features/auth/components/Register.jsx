@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
  import { useForm } from "react-hook-form";
-import SubmitButton from "../../components/SubmitButton";
-import { registerUser } from "../../services/apiServices";
+import SubmitButton from "../../../components/SubmitButton";
+import { registerUser } from "../../../services/apiServices";
 
 function Register() {
   const dispatch = useDispatch();

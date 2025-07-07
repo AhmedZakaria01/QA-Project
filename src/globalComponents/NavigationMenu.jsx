@@ -1,105 +1,35 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { setSelectedMenuLinks } from "../application/slices/navbar_Links_Slice";
+import { navList } from "../Nav_Menu";
+import { closePopup } from "../application/slices/uiSlice";
 function NavigationMenu() {
-  const navList = [
-    {
-      id: 1,
-      name: "Advanced Search",
-      icon: "fa-solid fa-magnifying-glass",
-      link: "/advanced-search",
-    },
-    {
-      id: 2,
-      name: "Exceptions",
-      icon: "fa-solid fa-triangle-exclamation",
-      link: "/exceptions",
-    },
-    {
-      id: 3,
-      name: "Barcode Generator",
-      icon: "fa-solid fa-barcode",
-      link: "/barcode-generator",
-      subItems: {
-        subitem1: [
-          {
-            sub1: "Reprint Barcode",
-            sub2: "Reprint Location Barcodes",
-          },
-        ],
-        subitem2: [
-          {
-            sub1: "Generate Barcode",
-            sub2: "Generate Location Barcodes",
-          },
-        ],
-      },
-    },
-    {
-      id: 4,
-      name: "Customer Service",
-      icon: "fa-solid fa-headset",
-      link: "/customer-service",
-    },
-    {
-      id: 5,
-      name: "Fleet Management",
-      icon: "fa-solid fa-arrow-up-right-from-square",
-      link: "/fleet-management",
-    },
-    {
-      id: 6,
-      name: "Data Entry",
-      icon: "fa-solid fa-laptop",
-      link: "/data-entry",
-    },
-    {
-      id: 7,
-      name: "Warehouses",
-      icon: "fa-solid fa-warehouse",
-      link: "/warehouses",
-    },
-    {
-      id: 8,
-      name: "Services",
-      icon: "fa-solid fa-concierge-bell",
-      link: "/services",
-    },
-    {
-      id: 9,
-      name: "Department",
-      icon: "fa-solid fa-building",
-      link: "/department",
-    },
-    {
-      id: 10,
-      name: "Invoices",
-      icon: "fa-solid fa-file-invoice",
-      link: "/invoices",
-    },
-    {
-      id: 11,
-      name: "Tracker",
-      icon: "fa-solid fa-location-arrow",
-      link: "/tracker",
-    },
-    {
-      id: 12,
-      name: "Administration",
-      icon: "fa-solid fa-user-shield",
-      link: "/administration",
-    },
-    { id: 13, name: "Setting", icon: "fa-solid fa-gear", link: "/setting" },
-    { id: 14, name: "Report", icon: "fa-solid fa-chart-line", link: "/report" },
-  ];
+  const [selectedNavLink, setSelectedNavLink] = useState([]);
+  useEffect(() => {
+    if (selectedNavLink && Object.keys(selectedNavLink).length > 0) {
+      console.log(selectedNavLink);
+    }
+  }, [selectedNavLink]);
 
+  const handleMenuClick = (item) => {
+    dispatch(setSelectedMenuLinks(item)); // ✅ dispatch properly
+    dispatch(closePopup()); // ✅ close the popup
+  };
+
+  const dispatch = useDispatch();
   return (
-    <nav className="bg-white p-6 rounded-2xl max-w-7xl mx-auto mt-12 shadow-lg">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px  border-gray-200 rounded-xl overflow-hidden">
+    <nav className=" p-6 rounded-2xl max-w-7xl mx-auto shadow-sm my-10 ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px  rounded-xl overflow-hidden">
         {navList.map((item) => (
           <Link
             key={item.id}
             to={item.link}
             className="group flex flex-col items-center justify-center gap-2 p-5 text-center bg-white transition duration-200 hover:bg-indigo-50"
+            onClick={() => {
+              handleMenuClick(item);
+              // setSelectedNavLink(item?.dropDownMenus);
+            }}
           >
             <div className="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600 text-xl transition group-hover:bg-indigo-600 group-hover:text-white shadow">
               <i className={item.icon}></i>

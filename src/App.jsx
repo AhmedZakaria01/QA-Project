@@ -1,28 +1,39 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./features/auth/PageNotFound";
 import Layout from "./Layout";
-import Register from "./features/auth/Register";
 import Login from "./features/auth/components/Login";
 import NavigationMenu from "./globalComponents/NavigationMenu";
-export default function App() {
+import BarcodeGenerator from "./features/barcode/components/GenerateBarcode";
+import GenerateBarcode from "./features/barcode/components/GenerateBarcode";
+import Boxes from "./features/dataEntry/components/Boxes";
+import Files from "./features/dataEntry/components/Files";
+import Documents from "./features/dataEntry/components/Documents";
+import Dashboard from "./features/dashboard/components/dashboard";
+
+function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />} />
+    <BrowserRouter>
+      <Routes>
+        {/* All routes inside Layout */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
 
-          {/* AUTH */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/GenerateBarcode" element={<GenerateBarcode />} />
           <Route path="/NavigationMenu" element={<NavigationMenu />} />
+          {/* Data Entry */}
+          <Route path="/Boxes" element={<Boxes />} />
+          <Route path="/Files" element={<Files />} />
+          <Route path="/Documents" element={<Documents />} />
+        </Route>
 
-          {/* Page Not Found */}
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+        {/* Routes without Layout */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Page Not Found */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-{
-  /* <ProtectedRoute></ProtectedRoute> */
-}
+
+export default App;

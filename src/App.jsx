@@ -24,18 +24,13 @@ function App() {
           <Route path="/Boxes" element={<Boxes />} />
           <Route path="/Files" element={<Files />} />
           <Route path="/Documents" element={<Documents />} />
+          <Route path="*" element={<PageNotFound />} />
         </Route>
 
         {/* Routes without Layout */}
         <Route path="/login" element={<Login />} />
 
         {/* Page Not Found */}
-        <Route path="*" element={<PageNotFound />} />
-
-
-
-
-
       </Routes>
     </BrowserRouter>
 

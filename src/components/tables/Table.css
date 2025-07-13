@@ -1,0 +1,134 @@
+/* Modern Table Styles */
+.modern-table-container {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  overflow: hidden;
+}
+
+.table-header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.table-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+table th {
+  padding: 12px 15px;
+  text-align: center;
+  background-color: #000000;
+  color: white;
+  border: 1px solid #38373752;
+}
+
+table td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #38373752;
+}
+
+table tr:hover {
+  background-color: #8d8f8f;
+}
+
+/* Responsive Wrapper */
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* Filter and Global Search */
+.global-filter-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+}
+
+.filter-input {
+  padding: 6px;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+/* Pagination */
+.pagination-container {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pagination-buttons button {
+  padding: 5px 10px;
+  margin: 0 2px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+}
+
+.page-size-select {
+  padding: 5px;
+}
+
+/* Selected Rows Preview */
+.selected-preview {
+  padding: 15px;
+  background: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+/* Column Controls */
+.column-controls-dropdown {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Loading and Empty States */
+.loading-state, .empty-state {
+  padding: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+  table {
+    font-size: 12px;
+  }
+
+  table th,
+  table td {
+    padding: 6px;
+  }
+  
+  .table-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .pagination-container {
+    flex-direction: column;
+  }
+}
+
+

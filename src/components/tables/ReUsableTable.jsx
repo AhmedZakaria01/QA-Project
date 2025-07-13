@@ -10,11 +10,11 @@ import {
 } from "react-table";
 import "../tables/Table.css";
 
-const DefaultColumnFilter = ({ column: { filterValue, setFilter } }) => (
+const DefaultColumnFilter = ({ column: { filterValue, setFilter, id } }) => (
   <input
     value={filterValue || ""}
     onChange={(e) => setFilter(e.target.value || undefined)}
-    placeholder="Search..."
+    placeholder={`Search ${id.toLowerCase()}...`}
     className="filter-input"
   />
 );
@@ -23,18 +23,19 @@ DefaultColumnFilter.propTypes = {
   column: PropTypes.shape({
     filterValue: PropTypes.any,
     setFilter: PropTypes.func,
+    id: PropTypes.string,
   }),
 };
 
 const GlobalFilter = ({ value, onChange }) => (
-  <span className="global-filter-container">
+  <div className="global-filter-container">
     <input
       value={value || ""}
       onChange={(e) => onChange(e.target.value)}
-      placeholder="Type to search"
+      placeholder="Search all columns..."
       className="global-filter-input"
     />
-  </span>
+  </div>
 );
 
 GlobalFilter.propTypes = {
@@ -111,16 +112,17 @@ const ColumnControls = ({ allColumns, hiddenColumns, setHiddenColumns }) => {
   return (
     <div className="column-controls-dropdown">
       <div className="column-controls-header">
+        <h4>Column Visibility</h4>
         <label className="select-all-toggle">
           <input
             type="checkbox"
             ref={input => {
               if (input) input.indeterminate = someHidden;
             }}
-            checked={allHidden}
+            checked={!allHidden}
             onChange={toggleAllColumns}
           />
-          {allHidden ? "Show All" : "Hide All"}
+          Select All
         </label>
       </div>
       <div className="column-list">
@@ -133,7 +135,7 @@ const ColumnControls = ({ allColumns, hiddenColumns, setHiddenColumns }) => {
                 onChange={() => toggleColumn(column.id)}
               />
               <span className="checkmark"></span>
-              {column.Header}
+              {column.render("Header")}
             </label>
           </div>
         ))}
@@ -169,8 +171,9 @@ const PaginationControls = ({
       <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{">>"}</button>
     </div>
     <span className="page-indicator">
-      Page <strong>{pageIndex + 1} of {pageOptions.length}</strong>
+      Page <strong>{pageIndex + 1}</strong> of <strong>{pageOptions.length}</strong>
     </span>
+    <span>Go to page:</span>
     <input
       type="number"
       defaultValue={pageIndex + 1}
@@ -178,7 +181,8 @@ const PaginationControls = ({
         const page = e.target.value ? Number(e.target.value) - 1 : 0;
         gotoPage(page);
       }}
-      style={{ width: "100px" }}
+      min={1}
+      max={pageOptions.length}
     />
     <select
       className="page-size-select"
@@ -214,7 +218,7 @@ const ReUsableTable = ({
   onRowClick,
   showGlobalFilter = true,
   showColumnControls = true,
-  showSelectedPreview = true,
+  showSelectedPreview = false,
   pageSizeOptions = [5, 10, 20, 30, 50],
   defaultPageSize = 10,
   className = "",
@@ -290,21 +294,35 @@ const ReUsableTable = ({
   }, [hiddenColumns, allColumns]);
 
   return (
-    <div className={`modern-table-container ${className}`}>
+    <div className={`user-management-table ${className}`}>
       <div className="table-header">
         <h2 className="table-title">{title}</h2>
-        <div className="table-controls">
-          {showGlobalFilter && <GlobalFilter value={globalFilter} onChange={setGlobalFilter} />}
-          {showColumnControls && (
-            <div className="column-controls-container">
-              <button className="column-toggle-button" onClick={() => setShowColumnVisibility(!showColumnVisibility)}>
-                {showColumnVisibility ? "Hide Columns" : "Show Columns"}
-              </button>
-            </div>
-          )}
-        </div>
       </div>
 
+      {/* Table Controls */}
+      <div className="table-controls">
+        {showGlobalFilter && <GlobalFilter value={globalFilter} onChange={setGlobalFilter} />}
+        
+        {showColumnControls && (
+          <div className="column-controls-container">
+            <button 
+              className="column-toggle-button"
+              onClick={() => setShowColumnVisibility(!showColumnVisibility)}
+            >
+              {showColumnVisibility ? "Hide Columns" : "Show Columns"}
+            </button>
+            {showColumnVisibility && (
+              <ColumnControls
+                allColumns={allColumns}
+                hiddenColumns={hiddenColumns}
+                setHiddenColumns={setHiddenColumns}
+              />
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Table */}
       <div className="table-wrapper">
         <table {...getTableProps()}>
           <thead>
@@ -317,11 +335,6 @@ const ReUsableTable = ({
                       <th key={column.id} {...props}>
                         <div className="header-content">
                           {column.render("Header")}
-                          {column.id !== "selection" && (
-                            <span className="sort-indicator">
-                              {column.isSorted ? (column.isSortedDesc ? " ▼" : " ▲") : " ↕"}
-                            </span>
-                          )}
                         </div>
                       </th>
                     );
@@ -339,9 +352,9 @@ const ReUsableTable = ({
           </thead>
           <tbody {...getTableBodyProps()}>
             {isLoading ? (
-              <tr><td colSpan={columns.length} className="loading-state"><div className="loading-spinner" /> Loading...</td></tr>
+              <tr><td colSpan={columns.length} className="loading-state">Loading...</td></tr>
             ) : page.length === 0 ? (
-              <tr><td colSpan={columns.length} className="empty-state"><div className="empty-icon">📭</div><p>No data available</p><small>Try adjusting filters or searching again.</small></td></tr>
+              <tr><td colSpan={columns.length} className="empty-state">No data available</td></tr>
             ) : (
               page.map(row => {
                 prepareRow(row);
@@ -350,7 +363,6 @@ const ReUsableTable = ({
                     key={row.id || row.index}
                     {...row.getRowProps()}
                     onClick={() => onRowClick && onRowClick(row)}
-                    className={row.isSelected ? "selected-row" : ""}
                   >
                     {row.cells.map(cell => (
                       <td key={cell.column.id} {...cell.getCellProps()}>
@@ -365,6 +377,7 @@ const ReUsableTable = ({
         </table>
       </div>
 
+      {/* Pagination */}
       <PaginationControls
         gotoPage={gotoPage}
         canPreviousPage={canPreviousPage}
@@ -378,35 +391,6 @@ const ReUsableTable = ({
         pageSize={pageSize}
         pageSizeOptions={pageSizeOptions}
       />
-
-      {showColumnControls && showColumnVisibility && (
-        <div className="column-controls-container">
-          <ColumnControls
-            allColumns={allColumns}
-            hiddenColumns={hiddenColumns}
-            setHiddenColumns={setHiddenColumns}
-          />
-        </div>
-      )}
-
-      {showSelectedPreview && selectedRows.length > 0 && (
-        <div className="selected-preview">
-          <div className="preview-header">
-            <h3>Selected Rows ({selectedRows.length})</h3>
-          </div>
-          <div className="preview-content">
-            {selectedRows.map((item, index) => (
-              <div key={index} className="selected-item">
-                {Object.entries(item).map(([key, value]) => (
-                  <div key={key} className="item-field">
-                    <strong>{key}:</strong> {String(value)}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

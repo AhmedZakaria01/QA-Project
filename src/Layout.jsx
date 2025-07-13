@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedMenuLinks } from "./application/slices/navbar_Links_Slice";
 import { getMenuByPath } from "./utils/getMenuByPath";
-import { setLocalStorage } from "../storageManager";
 
 function Layout() {
   const location = useLocation();
@@ -15,6 +14,7 @@ function Layout() {
 
     if (matchedMenu) {
       dispatch(setSelectedMenuLinks(matchedMenu));
+      console.log(matchedMenu);
       // setLocalStorage("navMenuLinks", matchedMenu);
     }
   }, [location.pathname, dispatch]);

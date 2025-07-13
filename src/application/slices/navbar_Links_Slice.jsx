@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setLocalStorage } from "../../../storageManager";
 
 const navbar_Links_Slice = createSlice({
   name: "navbar links",
@@ -8,7 +7,7 @@ const navbar_Links_Slice = createSlice({
   },
   reducers: {
     setSelectedMenuLinks: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.selectedMenuLink = action.payload;
       // setLocalStorage("navMenuLinks", action.payload);
     },

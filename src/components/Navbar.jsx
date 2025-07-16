@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMenuByPath } from "../utils/getMenuByPath";
 import prm_logo from "../../src/assets/prm_logo.png";
-import menu_icon from "../../src/assets/menu_icon.png";
+import menu_icon from "../../src/assets/menu.png";
 import { closePopup, openPopup } from "../application/slices/uiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Popup from "../globalComponents/Popup";
@@ -21,7 +21,7 @@ function Navbar() {
   // Stores timeout ID for delayed closing of dropdown
   const [closeTimeout, setCloseTimeout] = useState(null);
 
-  const isOpen = useSelector((state) => state.ui.isPopupOpen);
+  const { isPopupOpen } = useSelector((state) => state.ui);
 
   const dispatch = useDispatch();
   // Syncs the selected menu based on current route path
@@ -72,7 +72,7 @@ function Navbar() {
         {/* The Popup */}
         <Popup
           component={<NavigationMenu />}
-          isOpen={isOpen}
+          isOpen={isPopupOpen}
           setIsOpen={() => dispatch(closePopup())}
         />
         {selectedMenuLink?.name && (

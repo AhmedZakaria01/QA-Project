@@ -19,7 +19,7 @@
   color: white;
 }
 
-.table-title {
+.column-controls-header h4 {
   margin: 0;
   font-size: 1.4rem;
   font-weight: 600;
@@ -271,7 +271,14 @@ input[type="checkbox"] {
   transform: rotate(45deg);
 }
 
-/* Pagination */
+tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+tr:hover {
+  background-color: #b6b6b6;
+}
+
 .pagination-container {
   display: flex;
   justify-content: space-between;
@@ -375,7 +382,6 @@ input[type="checkbox"] {
   color: #343a40;
 }
 
-/* Loading and Empty States */
 .loading-state, .empty-state {
   text-align: center;
   padding: 40px 20px;

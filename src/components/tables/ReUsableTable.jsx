@@ -26,7 +26,7 @@ const DefaultColumnFilter = ({ column: { filterValue, setFilter } }) => (
   <input
     value={filterValue || ""}
     onChange={(e) => setFilter(e.target.value || undefined)}
-    placeholder={`Search ${id.toLowerCase()}...`}
+    placeholder="Search..."
     className="filter-input"
   />
 );
@@ -35,7 +35,6 @@ DefaultColumnFilter.propTypes = {
   column: PropTypes.shape({
     filterValue: PropTypes.any,
     setFilter: PropTypes.func,
-    id: PropTypes.string,
   }),
 };
 
@@ -46,14 +45,14 @@ DefaultColumnFilter.propTypes = {
  * @param {Function} props.onChange - Handler for filter changes
  */
 const GlobalFilter = ({ value, onChange }) => (
-  <div className="global-filter-container">
+  <span className="global-filter-container">
     <input
       value={value || ""}
       onChange={(e) => onChange(e.target.value)}
-      placeholder="Search all columns..."
+      placeholder="Type to search"
       className="global-filter-input"
     />
-  </div>
+  </span>
 );
 
 GlobalFilter.propTypes = {
@@ -283,7 +282,6 @@ const PaginationControls = ({
         {pageIndex + 1} of {pageOptions.length}
       </strong>
     </span>
-    <span>Go to page:</span>
     <input
       type="number"
       defaultValue={pageIndex + 1}
@@ -291,8 +289,7 @@ const PaginationControls = ({
         const page = e.target.value ? Number(e.target.value) - 1 : 0;
         gotoPage(page);
       }}
-      min={1}
-      max={pageOptions.length}
+      style={{ width: "100px" }}
     />
     <select
       className="page-size-select"
@@ -459,7 +456,7 @@ const ReUsableTable = ({
   onRowClick,
   showGlobalFilter = true,
   showColumnControls = true,
-  showSelectedPreview = false,
+  showSelectedPreview = true,
   pageSizeOptions = [5, 10, 20, 30, 50],
   defaultPageSize = 10,
   className = "",

@@ -21,7 +21,7 @@ function Navbar() {
   // Stores timeout ID for delayed closing of dropdown
   const [closeTimeout, setCloseTimeout] = useState(null);
 
-  const { isPopupOpen } = useSelector((state) => state.ui);
+  const { isMenuPopupOpen } = useSelector((state) => state.ui);
 
   const dispatch = useDispatch();
   // Syncs the selected menu based on current route path
@@ -58,7 +58,7 @@ function Navbar() {
 
   // Handle Open Menu PopUp
   const handleOpenMenu = () => {
-    dispatch(openPopup());
+    dispatch(openPopup('menu'));
   };
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900 h-14 shadow">
@@ -72,8 +72,8 @@ function Navbar() {
         {/* The Popup */}
         <Popup
           component={<NavigationMenu />}
-          isOpen={isPopupOpen}
-          setIsOpen={() => dispatch(closePopup())}
+          isOpen={isMenuPopupOpen}
+          setIsOpen={() => dispatch(closePopup("menu"))}
         />
         {selectedMenuLink?.name && (
           <div className="flex items-center gap-6 relative px-6">

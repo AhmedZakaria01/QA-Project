@@ -32,7 +32,7 @@ function NavigationMenu() {
   // Handles clicking on a menu item
   const handleMenuClick = (item) => {
     dispatch(setSelectedMenuLinks(item));
-    dispatch(closePopup());
+    dispatch(closePopup("menu"));
   };
 
   return (

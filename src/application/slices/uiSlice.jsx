@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { actions } from "react-table";
-
 const initialState = {
-  isPopupOpen: false,
+  isMenuPopupOpen: false,
   tablePopUp: false,
 };
 
@@ -11,17 +9,14 @@ export const uiSlice = createSlice({
   initialState,
   reducers: {
     openPopup: (state, action) => {
-      if (action.payload === "table") {
-        state.tablePopUp = true;
-        console.log(action.payload);
-      }
+      if (action.payload === "menu") state.isMenuPopupOpen = true;
+      else if (action.payload === "table") state.tablePopUp = true;
+
       // state.isPopupOpen = true;
     },
     closePopup: (state, action) => {
-      if (action.payload === "table") {
-        state.tablePopUp = false;
-      }
-      state.isPopupOpen = false;
+      if (action.payload === "menu") state.isMenuPopupOpen = false;
+      else if (action.payload === "table") state.tablePopUp = false;
     },
   },
 });

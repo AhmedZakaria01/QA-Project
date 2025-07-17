@@ -32,7 +32,7 @@ const config = {
         xxl: "1400px",
       },
       fontFamily: {
-        sans: ['"Inter"', "system-ui", "sans-serif"],
+        boyka: ['"Inter"', "system-ui", "sans-serif"],
         serif: ['"Merriweather"', "serif"],
         mono: ['"Fira Code"', "monospace"],
       },
